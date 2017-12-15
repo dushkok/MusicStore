@@ -54,9 +54,9 @@ namespace MusicStore
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "518334838540983",
+               appSecret: "2ae9796dadbf5d222984f1ef790e50bf");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
