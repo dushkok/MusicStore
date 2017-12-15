@@ -9,14 +9,13 @@
 <div>
     <h4>Song</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal col-lg-10 col-md-10 col-sm-10 col-xs-10">
         <dt>
-            @Html.DisplayNameFor(model => model.Album.Title)
+            Album Title
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Album.Title)
-        </dd>
+            <a href="@Url.Action("Details","Albums", new { id = Model.Album.AlbumId })">@Model.Album.Title</a>        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Title)
@@ -35,8 +34,12 @@
         </dd>
 
     </dl>
+    <img class="img img-rounded col-lg-2 col-md-2 col-sm-2" src="@Model.Album.Poster" />
+
 </div>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.SongId }) |
+    @Html.ActionLink("Delete", "Delete", new { id = Model.SongId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

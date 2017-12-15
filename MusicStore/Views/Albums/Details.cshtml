@@ -11,11 +11,11 @@
     <hr />
     <dl class="dl-horizontal col-lg-10 col-md-10 col-sm-10 col-xs-10">
         <dt>
-            @Html.DisplayNameFor(model => model.Artist.Name)
+            Artist Name
         </dt>
 
         <dd>
-            @Html.ActionLink(Model.Artist.Name,"Details","Artists",null,new { id = Model.Artist.ArtistId })
+            <a href="@Url.Action("Details","Artists", new { id = Model.Artist.ArtistId })">@Model.Artist.Name</a>
         </dd>
 
         <dt>
@@ -51,11 +51,38 @@
         </dd>
 
     </dl>
+    
+    <img class="img img-rounded col-lg-2 col-md-2 col-sm-2" src="@Model.Poster" />
 </div>
-<img class="img img-rounded col-lg-2 col-md-2 col-sm-2" src="@Model.Poster" />
 
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.AlbumId }) |
     @Html.ActionLink("Delete", "Delete", new { id = Model.AlbumId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+<hr />
+<h4>Songs</h4>
+<table class="table">
+    <tr>
+        <th>
+            Song Title
+        </th>
+        <th>
+            <span class="glypglyphicon glyphicon glyphicon-time"></span>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var song in Model.Songs) {
+        <tr>
+      
+            <td>
+                <a href="@Url.Action("Details","Songs",new {id = song.SongId})">@song.Title</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => song.Length)
+            </td>
+        </tr>
+    }
+
+</table>
