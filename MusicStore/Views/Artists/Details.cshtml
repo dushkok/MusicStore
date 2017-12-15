@@ -1,0 +1,67 @@
+﻿@model MusicStore.Models.Artist
+
+@{
+    ViewBag.Title = @Model.Name;
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>@Model.Name</h4>
+    <hr />
+    <dl class="dl-horizontal col-lg-10 col-md-10 col-sm-10 col-xs-10">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Origin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Origin)
+        </dd>
+    
+
+    </dl>
+    <img class="img img-rounded col-lg-2 col-md-2 col-sm-2" src="@Model.Picture" />
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ArtistId }) |
+    @Html.ActionLink("Delete", "Delete", new { id = Model.ArtistId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<hr />
+<h4>Albums</h4>
+<div class="row">
+
+    @foreach (var album in Model.Albums)
+    {
+
+        <a href="@Url.Action("Details", "Albums", new {id = album.AlbumId})">
+            <div class="col-lg-2">
+                <div class="thumbnail">
+                    <img src="@album.Poster">
+                    <div class="caption">
+                        <p class="text-primary">@album.Title</p>
+                        <p class="text-primary">@album.Artist.Name</p>
+                        <p class="text-primary">@album.Price$</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+    }
+</div>

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<MusicStore.Models.Artist>
+
+@{
+    ViewBag.Title = "Artists";
+}
+
+<h2>Artists</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div class="row">
+    
+    @foreach (var item in Model)
+    {
+
+        <a href="@Url.Action("Details", "Artists", new {id = item.ArtistId})">
+            <div class="col-lg-2">
+                <div class="thumbnail">
+                    <img src="@item.Picture">
+                    <div class="caption">
+                        <p class="text-primary">@item.Name</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+    }
+</div>
+<br/>

@@ -1,0 +1,61 @@
+﻿@model MusicStore.Models.Album
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Album</h4>
+    <hr />
+    <dl class="dl-horizontal col-lg-10 col-md-10 col-sm-10 col-xs-10">
+        <dt>
+            @Html.DisplayNameFor(model => model.Artist.Name)
+        </dt>
+
+        <dd>
+            @Html.ActionLink(Model.Artist.Name,"Details","Artists",null,new { id = Model.Artist.ArtistId })
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price) $
+        </dd>
+
+    </dl>
+</div>
+<img class="img img-rounded col-lg-2 col-md-2 col-sm-2" src="@Model.Poster" />
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AlbumId }) |
+    @Html.ActionLink("Delete", "Delete", new { id = Model.AlbumId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

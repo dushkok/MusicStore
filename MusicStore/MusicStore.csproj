@@ -19,7 +19,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44332</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -190,8 +190,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AlbumsController.cs" />
+    <Compile Include="Controllers\ArtistsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SongsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -216,6 +219,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-paper.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -272,6 +276,21 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Artists\Create.cshtml" />
+    <Content Include="Views\Artists\Delete.cshtml" />
+    <Content Include="Views\Artists\Details.cshtml" />
+    <Content Include="Views\Artists\Edit.cshtml" />
+    <Content Include="Views\Artists\Index.cshtml" />
+    <Content Include="Views\Albums\Create.cshtml" />
+    <Content Include="Views\Albums\Delete.cshtml" />
+    <Content Include="Views\Albums\Details.cshtml" />
+    <Content Include="Views\Albums\Edit.cshtml" />
+    <Content Include="Views\Albums\Index.cshtml" />
+    <Content Include="Views\Songs\Create.cshtml" />
+    <Content Include="Views\Songs\Delete.cshtml" />
+    <Content Include="Views\Songs\Details.cshtml" />
+    <Content Include="Views\Songs\Edit.cshtml" />
+    <Content Include="Views\Songs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -315,7 +334,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>62246</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:62246/</IISUrl>
+          <IISUrl>https://localhost:44332/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
