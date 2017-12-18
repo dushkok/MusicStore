@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Index</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="https://localhost:44332/API%20Views/Index.html">Music Store</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="https://localhost:44332/API%20Views/Index.html">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://localhost:44332/API%20Views/Artists.html">Artists</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://localhost:44332/API%20Views/Albums.html">Albums</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://localhost:44332/API%20Views/Songs.html">Songs</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container body-content text-center">
+    <h3>Featured Artists</h3>
+    <hr/>
+    <div class="row" id="Artists">
+
+    </div>
+    <hr/>
+    <h3>Featured Albums</h3>
+    <hr/>
+    <div class="row text-center" id="Albums">
+    </div>
+    <hr/>
+    <h3>Featured Songs</h3>
+    <hr/>
+    <div class="row text-center" id="Songs">
+    </div>
+</div>
+<script>
+    var uriAr = 'https://localhost:44332/api/Artists/?Size=6';
+    var uriAl = 'https://localhost:44332/api/Albums/?Size=6';
+    var uriSo = 'https://localhost:44332/api/Songs/?Size=6';
+
+    var uriArApi = 'https://localhost:44332/api/Artists/';
+    var uriAlApi = 'https://localhost:44332/api/Albums/';
+    var uriSoApi = 'https://localhost:44332/api/Songs/';
+
+    $(document).ready(function() {
+        // Send an AJAX request
+        $.getJSON(uriAr)
+            .done(function(data) {
+                console.log(data);
+                // On success, 'data' contains a list of products.
+                $.each(data,
+                    function(key, item) {
+                        // Add a list item for the product.
+                        console.log(key + ":" + item);
+                        var card = '<div class="card ml-4" style="width: 10rem;">' +
+                            '<img class="card-img-top" src="' +
+                            item.Picture +
+                            '" alt="Card image cap">' +
+                            '<div class="card-block">' +
+                            '<h4 class="card-title">' +
+                            item.Name +
+                            '</h4>' +
+                            '<a href="' +
+                            uriArApi +
+                            item.ArtistId +
+                            '" class="btn btn-primary">Go to artist</a>' +
+                            '</div></div>';
+                        $(card).appendTo($('#Artists'));
+                    });
+            });
+
+        $.getJSON(uriAl)
+            .done(function(data) {
+                console.log(data);
+                // On success, 'data' contains a list of products.
+                $.each(data,
+                    function(key, item) {
+                        // Add a list item for the product.
+                        console.log(key + ":" + item);
+                        var card = '<div class="card ml-4" style="width: 10rem;">' +
+                            '<img class="card-img-top" src="' +
+                            item.Poster +
+                            '" alt="Card image cap">' +
+                            '<div class="card-block">' +
+                            '<h4 class="card-title">' +
+                            item.Title +
+                            '</h4>' +
+                            '<a href="' +
+                            uriAlApi +
+                            item.AlbumId +
+                            '" class="btn btn-primary">Go to album</a>' +
+                            '</div></div>';
+                        $(card).appendTo($('#Albums'));
+                    });
+            });
+
+        // Send an AJAX request
+        $.getJSON(uriSo)
+            .done(function(data) {
+                console.log(data);
+                // On success, 'data' contains a list of products.
+                $.each(data,
+                    function(key, item) {
+                        // Add a list item for the product.
+                        console.log(key + ":" + item);
+                        var card = '<div class="card ml-4" style="width: 10rem;">' +
+                            '<img class="card-img-top" src="' +
+                            item.Album.Poster +
+                            '" alt="Card image cap">' +
+                            '<div class="card-block">' +
+                            '<h4 class="card-title">' +
+                            item.Title +
+                            '</h4>' +
+                            '<a href="' +
+                            uriSoApi +
+                            item.SongId +
+                            '" class="btn btn-primary">Go to song</a>' +
+                            '</div></div>';
+                        $(card).appendTo($('#Songs'));
+                    });
+            });
+    });
+
+
+</script>
+</body>
+</html>
