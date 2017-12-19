@@ -21,9 +21,9 @@ namespace MusicStore.Controllers.API
         private MusicStoreDbContext db = new MusicStoreDbContext();
 
         // GET: api/Songs
-        public IEnumerable<Song> GetSongs(int? size)
+        public IEnumerable<Song> GetSongs()
         {
-            return size.HasValue ? db.Songs.Take(size.Value).ToList() : db.Songs.ToList();
+            return db.Songs.Include(s => s.Album).ToList();
         }
 
         // GET: api/Songs/5

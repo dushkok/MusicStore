@@ -20,13 +20,13 @@
                 <a class="nav-link" href="https://localhost:44332/API%20Views/Index.html">Home<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="https://localhost:44332/API%20Views/Artists.html">Artists</a>
+                <a class="nav-link" href="https://localhost:44332/API%20Views/Artists/Artists.html">Artists</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="https://localhost:44332/API%20Views/Albums.html">Albums</a>
+                <a class="nav-link" href="https://localhost:44332/API%20Views/Albums/Albums.html">Albums</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="https://localhost:44332/API%20Views/Songs.html">Songs</a>
+                <a class="nav-link" href="https://localhost:44332/API%20Views/Songs/Songs.html">Songs</a>
             </li>
         </ul>
     </div>
@@ -49,9 +49,9 @@
     </div>
 </div>
 <script>
-    var uriAr = 'https://localhost:44332/api/Artists/?Size=6';
-    var uriAl = 'https://localhost:44332/api/Albums/?Size=6';
-    var uriSo = 'https://localhost:44332/api/Songs/?Size=6';
+    var uriAr = 'https://localhost:44332/api/Artists/';
+    var uriAl = 'https://localhost:44332/api/Albums/';
+    var uriSo = 'https://localhost:44332/api/Songs/';
 
     var uriArApi = 'https://localhost:44332/api/Artists/';
     var uriAlApi = 'https://localhost:44332/api/Albums/';
@@ -63,7 +63,7 @@
             .done(function(data) {
                 console.log(data);
                 // On success, 'data' contains a list of products.
-                $.each(data,
+                $.each(data.slice(0, 6),
                     function(key, item) {
                         // Add a list item for the product.
                         console.log(key + ":" + item);
@@ -88,7 +88,7 @@
             .done(function(data) {
                 console.log(data);
                 // On success, 'data' contains a list of products.
-                $.each(data,
+                $.each(data.slice(0, 6),
                     function(key, item) {
                         // Add a list item for the product.
                         console.log(key + ":" + item);
@@ -114,7 +114,7 @@
             .done(function(data) {
                 console.log(data);
                 // On success, 'data' contains a list of products.
-                $.each(data,
+                $.each(data.slice(0,6),
                     function(key, item) {
                         // Add a list item for the product.
                         console.log(key + ":" + item);
