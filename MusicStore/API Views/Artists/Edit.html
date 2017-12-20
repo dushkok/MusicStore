@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Create</title>
+    <title>Edit</title>
     <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
@@ -32,11 +32,11 @@
         </div>
     </nav>
     <div class="container body-content">
-        <h3 class="text-center">Create Artist</h3>
+        <h3 class="text-center">Edit Artist</h3>
         <hr />
     <form class="col-lg-4" id="artistsForm">
         <div class="form-group">
-            <label for="email">Name:</label>
+            <label for="name">Name:</label>
             <input type="text" class="form-control" id="name" placeholder="Enter name" name="email">
         </div>
         <div class="form-group">
@@ -46,46 +46,56 @@
         <div class="form-group">
             <label for="origin">Origin:</label>
             <input type="text" class="form-control" id="origin" placeholder="Enter origin" name="origin">
-        </div>        
+        </div>
         <div class="form-group">
             <label for="picture">Picture:</label>
             <input type="text" class="form-control" id="picture" placeholder="Enter picture link" name="picture">
         </div>
-        <button  class="btn btn-primary" type="submit">Submit</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
     </form>
-    <script>
+        </div>
+        <script>
         $( document ).ready(function() {
+            var id = (window.location.href).split('=')[1];
+            var uriAr = 'https://localhost:44332/api/Artists/'+id;
 
-            var url = window.location;
-
+            $.getJSON(uriAr)
+                .done(function(data) {
+                    $('#name').val(data.Name);
+                    $('#bio').val(data.Bio);
+                    $('#origin').val(data.Origin);
+                    $('#picture').val(data.Picture);
+                });
             // SUBMIT FORM
             $("#artistsForm").submit(function(event) {
                 // Prevent the form from submitting via the browser.
                 event.preventDefault();
-                ajaxPost();
+                ajaxPut();
             });
 
 
-            function ajaxPost(){
+            function ajaxPut(){
 
                 // PREPARE FORM DATA
                 var formData = {
+                    ArtistId: id,
                     Name: $("#name").val(),
                     Bio: $("#bio").val(),
                     Origin: $("#origin").val(),
                     Picture: $('#picture').val()
-            }
-
+                }
+                console.log('https://localhost:44332/api/Artists/' + id);
+                console.log(formData);
                 // DO POST
                 $.ajax({
-                    type : "POST",
+                    type : "PUT",
                     contentType : "application/json",
-                    url: 'https://localhost:44332/api/Artists',
+                    url: 'https://localhost:44332/api/Artists/'+id,
                     data : JSON.stringify(formData),
                     dataType : 'json',
                     success : function(result,statusText,xhr) {
                         if (xhr.status === 201)
-                            alert('The artist has been created!');
+                            alert('The artist has been updated!');
                     },
                     error: function(err) {
                         alert('Bad request '+err.status);
@@ -103,6 +113,6 @@
                 $("#course").val("");
             }
         })
-    </script>
+        </script>
 </body>
 </html>

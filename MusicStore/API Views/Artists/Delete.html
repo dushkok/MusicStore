@@ -34,24 +34,20 @@
     <div class="container body-content">
         <h3 class="text-center">Artist</h3>
         <hr />
-        <div class="row" >
+        <div class="row">
             <div class="col-lg-10">
                 <p id="ArtisName">Artist Name: </p>
                 <p id="ArtisBio">Bio: </p>
                 <p id="ArtistOrigin">Origin: </p>
-                <a id="edit" href="">Edit artist</a> |
-                <a id="delete" href="" class="text-danger">Delete artist</a>
+                <button class="btn btn-danger" id="delete">Delete</button>
             </div>
             <div class="col-lg-2">
-                <img id="ArtistPicture"/>
+                <img id="ArtistPicture" />
             </div>
         </div>
-        <hr/>
-        <h3 class="text-center">Albums</h3>
         <hr />
-        <div class="row text-center" id="Albums"></div>
-        </div>
-<script>
+    </div>
+    <script>
     var id = (window.location.href).split('=')[1];
     var uriAr = 'https://localhost:44332/api/Artists/'+id;
     var uriAl = 'https://localhost:44332/api/Albums/Details?id=';
@@ -66,29 +62,32 @@
                 $('#ArtistPicture').attr('src', data.Picture);
                 $('#ArtistOrigin').append(data.Origin);
                 $('#edit').attr('href', 'https://localhost:44332/API%20Views/Artists/Edit.html?id='+id );
-                $('#delete').attr('href', 'https://localhost:44332/API%20Views/Artists/Delete.html?id='+id );
-                $.each(data.Albums,
-                    function (key, item) {
-                        console.log(item);
-                        var card = '<div class="card ml-4" style="width: 10rem;">' +
-                            '<img class="card-img-top" src="' +
-                            item.Poster +
-                            '" alt="Card image cap">' +
-                            '<div class="card-block">' +
-                            '<h4 class="card-title">' +
-                            item.Title +
-                            '</h4>' +
-                            '<a href="' +
-                            uriAl + item.AlbumId +
-                            '" class="btn btn-primary">Go to album</a>' +
-                            '</div></div>';
-                        $(card).appendTo($('#Albums'));
-                    });
+                
             });
+        $('#delete').click(function() {
+            if (confirm('Do you really want to delete this artist?')) {
+                ajaxDelete();
+            }
+        });
+
+        function ajaxDelete() {
+
+            $.ajax({
+                type: "DELETE",
+                url: 'https://localhost:44332/api/Artists/'+id,
+                success: function(result, statusText, xhr) {
+                    if (xhr.status === 200)
+                        alert('The artist has been deleted!');
+                },
+                error: function(err) {
+                    alert('Bad request ' + err.status);
+                }
+            });
+        }
 
     });
 
 
-</script>
+    </script>
 </body>
 </html>
