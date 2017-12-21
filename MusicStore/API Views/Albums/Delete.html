@@ -36,36 +36,37 @@
         <hr />
         <div class="row">
             <div class="col-lg-10">
-                <p id="ArtisName">Artist Name: </p>
-                <p id="ArtisBio">Bio: </p>
-                <p id="ArtistOrigin">Origin: </p>
+                <p id="ArtistName">Artist Name: </p>
+                <p id="Title">Title: </p>
+                <p id="Genre">Genre: </p>
+                <p id="ReleaseDate">Release Date: </p>
+                <p id="Price">Price: </p>
                 <button class="btn btn-danger" id="delete">Delete</button>
             </div>
             <div class="col-lg-2">
-                <img id="ArtistPicture" />
+                <img id="AlbumPoster" />
             </div>
         </div>
         <hr />
     </div>
     <script>
     var id = (window.location.href).split('=')[1];
-    var uriAr = 'https://localhost:44332/api/Artists/'+id;
-    var uriAl = 'https://localhost:44332/api/Albums/Details?id=';
+    var uriAl = 'https://localhost:44332/api/Albums/'+id;
 
 
     $(document).ready(function () {
-        $.getJSON(uriAr)
+        $.getJSON(uriAl)
             .done(function (data) {
                 console.log(data);
-                $('#ArtisName').append(data.Name);
-                $('#ArtisBio').append(data.Bio);
-                $('#ArtistPicture').attr('src', data.Picture);
-                $('#ArtistOrigin').append(data.Origin);
-                $('#edit').attr('href', 'https://localhost:44332/API%20Views/Artists/Edit.html?id='+id );
-                
+                $('#ArtistName').append(data.Artist.Name);
+                $('#Title').append(data.Title);
+                $('#Genre').append(data.Genre);
+                $('#ReleaseDate').append(data.ReleaseDate);
+                $('#Price').append(data.Price);
+                $('#AlbumPoster').attr('src', data.Poster);
             });
         $('#delete').click(function() {
-            if (confirm('Do you really want to delete this artist?')) {
+            if (confirm('Do you really want to delete this album?')) {
                 ajaxDelete();
             }
         });
@@ -74,12 +75,11 @@
 
             $.ajax({
                 type: "DELETE",
-                url: 'https://localhost:44332/api/Artists/'+id,
-                success: function(result, statusText, xhr) {
+                url: uriAl,
+                success: function (result, statusText, xhr) {
                     if (xhr.status === 200)
-                        alert('The artist has been deleted!');
-                        window.location.replace("Artists.html");
-    
+                        alert('The album has been deleted!');
+                        window.location.replace("Albums.html");
                 },
                 error: function(err) {
                     alert('Bad request ' + err.status);

@@ -239,6 +239,11 @@
     <Compile Include="ViewModel\ModelsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="API Views\Albums\Albums.html" />
+    <Content Include="API Views\Albums\Create.html" />
+    <Content Include="API Views\Albums\Delete.html" />
+    <Content Include="API Views\Albums\Details.html" />
+    <Content Include="API Views\Albums\Edit.html" />
     <Content Include="API Views\Artists\Artists.html" />
     <Content Include="API Views\Artists\Create.html" />
     <Content Include="API Views\Artists\Delete.html" />
@@ -319,7 +324,6 @@
     <Content Include="Views\Songs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="API Views\Albums\" />
     <Folder Include="API Views\Songs\" />
     <Folder Include="App_Data\" />
   </ItemGroup>

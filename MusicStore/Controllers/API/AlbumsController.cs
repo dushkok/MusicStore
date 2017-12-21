@@ -22,7 +22,7 @@ namespace MusicStore.Controllers.API
         // GET: api/Albums
         public IEnumerable<Album> GetAlbums()
         {
-            return db.Albums.Include(a => a.Songs).ToList();
+            return db.Albums.Include(a => a.Artist).ToList();
         }
 
         // GET: api/Albums/5
@@ -70,7 +70,7 @@ namespace MusicStore.Controllers.API
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return CreatedAtRoute("DefaultApi", new { id = album.AlbumId }, album);
         }
 
         // POST: api/Albums

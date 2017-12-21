@@ -32,42 +32,67 @@
         </div>
     </nav>
     <div class="container body-content">
-        <h3 class="text-center">Edit Artist</h3>
+        <h3 class="text-center">Edit Album</h3>
         <hr />
-    <form class="col-lg-4" id="artistsForm">
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" placeholder="Enter name" name="email">
-        </div>
-        <div class="form-group">
-            <label for="bio">Bio:</label>
-            <input type="text" class="form-control" id="bio" placeholder="Enter bio" name="bio" data-val-length="The field Bio must be a string with a maximum length of 250." data-val-length-max="250">
-        </div>
-        <div class="form-group">
-            <label for="origin">Origin:</label>
-            <input type="text" class="form-control" id="origin" placeholder="Enter origin" name="origin">
-        </div>
-        <div class="form-group">
-            <label for="picture">Picture:</label>
-            <input type="text" class="form-control" id="picture" placeholder="Enter picture link" name="picture">
-        </div>
-        <button class="btn btn-primary" type="submit">Submit</button>
-    </form>
-        </div>
-        <script>
+        <form class="col-lg-4" id="albumsForm">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" class="form-control" id="title" placeholder="Enter title" name="title">
+            </div>
+            <div class="form-group">
+                <label for="poster">Poster:</label>
+                <input type="text" class="form-control" id="poster" placeholder="Enter poster link" name="poster">
+            </div>
+            <div class="form-group">
+                <label for="genre">Genre:</label>
+                <input type="text" class="form-control" id="genre" placeholder="Enter genre" name="genre">
+            </div>
+            <div class="form-group">
+                <label for="releaseDate">Release Date:</label>
+                <input type="date" class="form-control" id="releaseDate" placeholder="Enter release date" name="releaseDate">
+            </div>
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="number" class="form-control" id="price" placeholder="Enter price" name="price" step="any">
+            </div>
+            <div class="form-group">
+                <label for="artist">Artist:</label>
+                <select class="form-control" id="artist"></select>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
         $( document ).ready(function() {
             var id = (window.location.href).split('=')[1];
-            var uriAr = 'https://localhost:44332/api/Artists/'+id;
+            var uriAr = 'https://localhost:44332/api/Artists/';
+            var uriAl = 'https://localhost:44332/api/Albums/'+id;
+            var arId;
+
+            $.getJSON(uriAl)
+                .done(function(data) {
+                    $('#title').val(data.Title);
+                    $('#poster').val(data.Poster);
+                    $('#genre').val(data.Genre);
+                    $('#releaseDate').val(data.ReleaseDate.slice(0,10));
+                    $('#price').val(data.Price);
+                    arId = data.ArtistId;
+                });
 
             $.getJSON(uriAr)
-                .done(function(data) {
-                    $('#name').val(data.Name);
-                    $('#bio').val(data.Bio);
-                    $('#origin').val(data.Origin);
-                    $('#picture').val(data.Picture);
+                .done(function (data) {
+                    // On success, 'data' contains a list of products.
+                    $.each(data,
+                        function (key, item) {
+                            var option = '<option value="' + item.ArtistId + '">' + item.Name + '</option>';
+                            $(option).appendTo($('#artist'));
+                        });
+                    $('#artist').val(arId);
                 });
+
             // SUBMIT FORM
-            $("#artistsForm").submit(function(event) {
+            $("#albumsForm").submit(function(event) {
                 // Prevent the form from submitting via the browser.
                 event.preventDefault();
                 ajaxPut();
@@ -78,25 +103,26 @@
 
                 // PREPARE FORM DATA
                 var formData = {
-                    ArtistId: id,
-                    Name: $("#name").val(),
-                    Bio: $("#bio").val(),
-                    Origin: $("#origin").val(),
-                    Picture: $('#picture').val()
+                    AlbumId: id,
+                    Title: $('#title').val(),
+                    Poster: $('#poster').val(),
+                    Genre: $('#genre').val(),
+                    ReleaseDate: $('#releaseDate').val(),  
+                    Price: $('#price').val(),
+                    ArtistId: $('#artist').val()    
                 }
 
                 // DO POST
                 $.ajax({
                     type : "PUT",
                     contentType : "application/json",
-                    url: 'https://localhost:44332/api/Artists/'+id,
+                    url: uriAl,
                     data : JSON.stringify(formData),
                     dataType : 'json',
                     success : function(result,statusText,xhr) {
                         if (xhr.status === 201)
-                            alert('The artist has been updated!');
+                            alert('The album has been updated!');
                             location.reload();
-
                     },
                     error: function(err) {
                         alert('Bad request '+err.status);
@@ -114,6 +140,6 @@
                 $("#course").val("");
             }
         })
-        </script>
+    </script>
 </body>
 </html>

@@ -32,60 +32,62 @@
         </div>
     </nav>
     <div class="container body-content">
-        <h3 class="text-center">Artist</h3>
+        <h3 class="text-center">Album</h3>
         <hr />
         <div class="row">
             <div class="col-lg-10">
-                <p id="ArtisName">Artist Name: </p>
-                <p id="ArtisBio">Bio: </p>
-                <p id="ArtistOrigin">Origin: </p>
-                <button class="btn btn-danger" id="delete">Delete</button>
+                <p id="ArtistName">Artist Name: </p>
+                <p id="Title">Title: </p>
+                <p id="Genre">Genre: </p>
+                <p id="ReleaseDate">Release Date: </p>
+                <p id="Price">Price: </p>
+                <a id="edit" href="">Edit album</a> |
+                <a id="delete" href="" class="text-danger">Delete album</a>
             </div>
             <div class="col-lg-2">
-                <img id="ArtistPicture" />
+                <img id="AlbumPoster" />
             </div>
         </div>
         <hr />
+        <h3 class="text-center">Songs</h3>
+        <hr />
+        <div class="row text-center" >
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Lenght</th>
+                </tr>
+                </thead>
+                <tbody id="TableBody">
+                
+                </tbody>
+            </table>
+        </div>
     </div>
     <script>
     var id = (window.location.href).split('=')[1];
-    var uriAr = 'https://localhost:44332/api/Artists/'+id;
+    var uriAr = 'https://localhost:44332/api/Albums/'+id;
     var uriAl = 'https://localhost:44332/api/Albums/Details?id=';
 
 
     $(document).ready(function () {
         $.getJSON(uriAr)
             .done(function (data) {
-                console.log(data);
-                $('#ArtisName').append(data.Name);
-                $('#ArtisBio').append(data.Bio);
-                $('#ArtistPicture').attr('src', data.Picture);
-                $('#ArtistOrigin').append(data.Origin);
-                $('#edit').attr('href', 'https://localhost:44332/API%20Views/Artists/Edit.html?id='+id );
-                
+                $('#ArtistName').append(data.Artist.Name);
+                $('#Title').append(data.Title);
+                $('#Genre').append(data.Genre);
+                $('#ReleaseDate').append(data.ReleaseDate);
+                $('#Price').append(data.Price);
+                $('#AlbumPoster').attr('src', data.Poster);
+                $('#edit').attr('href', 'https://localhost:44332/API%20Views/Albums/Edit.html?id='+id );
+                $('#delete').attr('href', 'https://localhost:44332/API%20Views/Albums/Delete.html?id='+id );
+                $.each(data.Songs,
+                    function (key, item) {
+                        var td = '<tr><td>' + item.Title + '</td><td>' + item.Length + '</td></tr>'
+                        $(td).appendTo($('#TableBody'));
+                    });
             });
-        $('#delete').click(function() {
-            if (confirm('Do you really want to delete this artist?')) {
-                ajaxDelete();
-            }
-        });
-
-        function ajaxDelete() {
-
-            $.ajax({
-                type: "DELETE",
-                url: 'https://localhost:44332/api/Artists/'+id,
-                success: function(result, statusText, xhr) {
-                    if (xhr.status === 200)
-                        alert('The artist has been deleted!');
-                        window.location.replace("Artists.html");
-    
-                },
-                error: function(err) {
-                    alert('Bad request ' + err.status);
-                }
-            });
-        }
 
     });
 

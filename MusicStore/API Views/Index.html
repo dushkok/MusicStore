@@ -89,9 +89,8 @@
                 console.log(data);
                 // On success, 'data' contains a list of products.
                 $.each(data.slice(0, 6),
-                    function(key, item) {
+                    function (key, item) {
                         // Add a list item for the product.
-                        console.log(key + ":" + item);
                         var card = '<div class="card ml-4" style="width: 10rem;">' +
                             '<img class="card-img-top" src="' +
                             item.Poster +
@@ -100,9 +99,13 @@
                             '<h4 class="card-title">' +
                             item.Title +
                             '</h4>' +
-                            '<a href="' +
-                            uriAlApi +
-                            item.AlbumId +
+                            '<p>' +
+                            item.Artist.Name +
+                            '</p>' +
+                            '<p>' +
+                            item.Price + '$' +
+                            '</p>' +
+                            '<a href="' + 'https://localhost:44332/API%20Views/Albums/Details.html?id=' + item.AlbumId +
                             '" class="btn btn-primary">Go to album</a>' +
                             '</div></div>';
                         $(card).appendTo($('#Albums'));
