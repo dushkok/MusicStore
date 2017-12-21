@@ -250,6 +250,11 @@
     <Content Include="API Views\Artists\Details.html" />
     <Content Include="API Views\Artists\Edit.html" />
     <Content Include="API Views\Index.html" />
+    <Content Include="API Views\Songs\Create.html" />
+    <Content Include="API Views\Songs\Delete.html" />
+    <Content Include="API Views\Songs\Details.html" />
+    <Content Include="API Views\Songs\Edit.html" />
+    <Content Include="API Views\Songs\Songs.html" />
     <Content Include="Content\bootstrap-paper.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -324,7 +329,6 @@
     <Content Include="Views\Songs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="API Views\Songs\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>

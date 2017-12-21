@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Songs</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="https://localhost:44332/API%20Views/Index.html">Music Store</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://localhost:44332/API%20Views/Index.html">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="Artists.html">Artists<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://localhost:44332/API%20Views/Albums/Albums.html">Albums</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://localhost:44332/API%20Views/Songs/Songs.html">Songs</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container body-content">
+        <hr />
+        <h3 class="text-center">Songs</h3>
+        <a href="Create.html">Create Song</a>
+        <hr />
+        <div class="row text-center">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Album</th>
+                    <th>Title</th>
+                    <th>Lenght</th>
+                </tr>
+                </thead>
+                <tbody id="TableBody"></tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        var id = (window.location.href).split('=')[1];
+        var uriSo = 'https://localhost:44332/api/Songs/';
+
+
+        $(document).ready(function () {
+            $.getJSON(uriSo)
+                .done(function (data) {
+                    $.each(data,
+                        function (key, item) {
+                            var td = '<tr><td>' + item.Album.Title + '</td>' +
+                                '<td><a href="Details.html?id='+item.SongId+'">' + item.Title + '</a></td>'+
+                                '<td> ' + item.Length + '</td></tr>';
+                            $(td).appendTo($('#TableBody'));
+                        });
+                });
+
+        });
+
+
+    </script>
+</body>
+</html>

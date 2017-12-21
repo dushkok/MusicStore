@@ -71,7 +71,7 @@ namespace MusicStore.Controllers.API
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return CreatedAtRoute("DefaultApi", new { id = song.SongId }, song);
         }
 
         // POST: api/Songs
