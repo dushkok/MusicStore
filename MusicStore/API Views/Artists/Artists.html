@@ -1,36 +1,40 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Index</title>
+    <title>Artists</title>
     <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script src="Artists.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="https://localhost:44332/API%20Views/Index.html">Music Store</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="../Index.html">Music Store</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="https://localhost:44332/API%20Views/Index.html">Home<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="Artists.html">Artists</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://localhost:44332/API%20Views/Albums/Albums.html">Albums</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://localhost:44332/API%20Views/Songs/Songs.html">Songs</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="../Index.html">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a  class="nav-link" href="../Artists/Artists.html">Artists</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../Albums/Albums.html">Albums</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../Songs/Songs.html">Songs</a>
+            </li> 
+            <li class="nav-item">
+                <a class="nav-link" href="https://localhost:44332/">MVC</a>
+            </li>
+        </ul>
+    </div>
+</nav>
     <div class="container body-content text-center">
         <h3>Artists</h3>
         <a href="Create.html">Create artist</a>
@@ -44,33 +48,12 @@
     var uriAr = 'https://localhost:44332/api/Artists/';
     
 
-    $(document).ready(function() {
-        // Send an AJAX request
-        $.getJSON(uriAr)
-            .done(function(data) {
-                console.log(data);
-                // On success, 'data' contains a list of products.
-                $.each(data,
-                    function(key, item) {
-                        // Add a list item for the product.
-                        console.log(key + ":" + item);
-                        var card = '<div class="card ml-4" style="width: 10rem;">' +
-                            '<img class="card-img-top" src="' +
-                            item.Picture +
-                            '" alt="Card image cap">' +
-                            '<div class="card-block">' +
-                            '<h4 class="card-title">' +
-                            item.Name +
-                            '</h4>' +
-                            '<a href="'+'https://localhost:44332/API%20Views/Artists/Details.html?id='+
-                            item.ArtistId +
-                            '" class="btn btn-primary">Go to artist</a>' +
-                            '</div></div>';
-                        $(card).appendTo($('#Artists'));
-                    });
-            });
+        $(document).ready(function () {
 
-    });
+            getArtistsData(uriAr);
+
+
+        });
 
 
     </script>

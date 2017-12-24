@@ -240,8 +240,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="API Views\Albums\Albums.html" />
+    <Content Include="API Views\Albums\Albums.js" />
     <Content Include="API Views\Albums\Create.html" />
     <Content Include="API Views\Albums\Delete.html" />
+    <Content Include="API Views\Artists\Artists.js" />
+    <Content Include="API Views\Songs\Songs.js" />
     <Content Include="API Views\Albums\Details.html" />
     <Content Include="API Views\Albums\Edit.html" />
     <Content Include="API Views\Artists\Artists.html" />

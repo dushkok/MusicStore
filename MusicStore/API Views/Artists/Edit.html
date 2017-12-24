@@ -6,31 +6,35 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script src="Artists.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="https://localhost:44332/API%20Views/Index.html">Music Store</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="../Index.html">Music Store</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="https://localhost:44332/API%20Views/Index.html">Home</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="Artists.html">Artists<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://localhost:44332/API%20Views/Albums/Albums.html">Albums</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://localhost:44332/API%20Views/Songs/Songs.html">Songs</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="../Index.html">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a  class="nav-link" href="../Artists/Artists.html">Artists</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../Albums/Albums.html">Albums</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../Songs/Songs.html">Songs</a>
+            </li> 
+            <li class="nav-item">
+                <a class="nav-link" href="https://localhost:44332/">MVC</a>
+            </li>
+        </ul>
+    </div>
+</nav>
     <div class="container body-content">
         <h3 class="text-center">Edit Artist</h3>
         <hr />
@@ -59,60 +63,17 @@
             var id = (window.location.href).split('=')[1];
             var uriAr = 'https://localhost:44332/api/Artists/'+id;
 
-            $.getJSON(uriAr)
-                .done(function(data) {
-                    $('#name').val(data.Name);
-                    $('#bio').val(data.Bio);
-                    $('#origin').val(data.Origin);
-                    $('#picture').val(data.Picture);
-                });
+            getEditData(uriAr);
+            
+
             // SUBMIT FORM
             $("#artistsForm").submit(function(event) {
                 // Prevent the form from submitting via the browser.
                 event.preventDefault();
-                ajaxPut();
+                ajaxArtistsPut(uriAr, id);
             });
 
-
-            function ajaxPut(){
-
-                // PREPARE FORM DATA
-                var formData = {
-                    ArtistId: id,
-                    Name: $("#name").val(),
-                    Bio: $("#bio").val(),
-                    Origin: $("#origin").val(),
-                    Picture: $('#picture').val()
-                }
-
-                // DO POST
-                $.ajax({
-                    type : "PUT",
-                    contentType : "application/json",
-                    url: 'https://localhost:44332/api/Artists/'+id,
-                    data : JSON.stringify(formData),
-                    dataType : 'json',
-                    success : function(result,statusText,xhr) {
-                        if (xhr.status === 201)
-                            alert('The artist has been updated!');
-                            location.reload();
-
-                    },
-                    error: function(err) {
-                        alert('Bad request '+err.status);
-                    }
-                });
-
-                // Reset FormData after Posting
-               // resetData();
-
-            }
-
-            function resetData(){
-                $("#id").val("");
-                $("#name").val("");
-                $("#course").val("");
-            }
+            
         })
         </script>
 </body>
