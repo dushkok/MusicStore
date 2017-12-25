@@ -9,24 +9,22 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-
 <div class="row">
-
     @foreach (var item in Model)
     {
-
-        <a href="@Url.Action("Details", "Albums", new {id = item.AlbumId})">
-            <div class="col-lg-2">
-                <div class="thumbnail">
-                    <img src="@item.Poster">
-                    <div class="caption">
-                        <p class="text-primary">@item.Title</p>
-                        <p class="text-primary">@item.Artist.Name</p>
-                        <p class="text-primary">@item.Price$</p>
-                    </div>
-                </div>
-            </div>
-        </a>
+    
+                 <a href="@Url.Action("Details", "Albums", new {id = item.AlbumId})">
+                     <div class="col-lg-2" >
+                         <div class="thumbnail">
+                             <img src="@item.Poster">
+                             <div class="caption" style="padding-bottom: 5px">
+                                 <p class="text-primary" style="margin-bottom: 5px">@item.Title</p>
+                                 <p class="text-primary" style="margin-bottom: 5px">@item.Artist.Name</p>
+                                 <p class="text-primary" style="margin-bottom: 5px">@item.Price$</p>
+                             </div>
+                         </div>
+                     </div>
+                 </a>
 
     }
 </div>

@@ -71,7 +71,7 @@
                     function(key, item) {
                         // Add a list item for the product.
                         console.log(key + ":" + item);
-                        var card = '<div class="card ml-4" style="width: 10rem;">' +
+                        var card = '<div class="card ml-4 mt-2 pb-2" style="width: 10rem;">' +
                             '<img class="card-img-top" src="' +
                             item.Picture +
                             '" alt="Card image cap">' +
@@ -79,8 +79,7 @@
                             '<h4 class="card-title">' +
                             item.Name +
                             '</h4>' +
-                            '<a href="' +
-                            uriArApi +
+                            '<a href="Artists/Details.html?id=' +
                             item.ArtistId +
                             '" class="btn btn-primary">Go to artist</a>' +
                             '</div></div>';
@@ -95,7 +94,7 @@
                 $.each(data.slice(0, 6),
                     function (key, item) {
                         // Add a list item for the product.
-                        var card = '<div class="card ml-4" style="width: 10rem;">' +
+                        var card = '<div class="card ml-4 mt-2 pb-2" style="width: 10rem;">' +
                             '<img class="card-img-top" src="' +
                             item.Poster +
                             '" alt="Card image cap">' +
@@ -125,7 +124,7 @@
                     function(key, item) {
                         // Add a list item for the product.
                         console.log(key + ":" + item);
-                        var card = '<div class="card ml-4" style="width: 10rem;">' +
+                        var card = '<div class="card ml-4 mt-2 pb-2" style="width: 10rem;">' +
                             '<img class="card-img-top" src="' +
                             item.Album.Poster +
                             '" alt="Card image cap">' +
@@ -133,8 +132,7 @@
                             '<h4 class="card-title">' +
                             item.Title +
                             '</h4>' +
-                            '<a href="' +
-                            uriSoApi +
+                            '<a href="Songs/Details.html?id=' +
                             item.SongId +
                             '" class="btn btn-primary">Go to song</a>' +
                             '</div></div>';

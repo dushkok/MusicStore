@@ -7,7 +7,7 @@ function getAlbumsData(uriAl) {
             $.each(data,
                 function (key, item) {
                     // Add a list item for the product.
-                    var card = '<div class="card ml-4" style="width: 10rem;">' +
+                    var card = '<div class="card ml-4 mt-2 pb-2" style="width: 10rem;">' +
                         '<img class="card-img-top" src="' +
                         item.Poster +
                         '" alt="Card image cap">' +
@@ -120,7 +120,7 @@ function getDetailsData(uriAr, id) {
             $('#delete').attr('href', 'https://localhost:44332/API%20Views/Albums/Delete.html?id=' + id);
             $.each(data.Songs,
                 function (key, item) {
-                    var td = '<tr><td>' + item.Title + '</td><td>' + item.Length + '</td></tr>'
+                    var td = '<tr><td><a href="../Songs/Details.html?id='+item.SongId+'">' + item.Title + '</a></td><td>' + item.Length + '</td></tr>'
                     $(td).appendTo($('#TableBody'));
                 });
         });
